@@ -1,0 +1,307 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="/jsf/commons/template/commonLayout.xhtml">
+	
+	<ui:define name="content">
+		<h:form prependId="false">
+			<div
+				style="text-align: center; background-color: yellow; padding: 5px">
+				<p:row>
+					<p:column colspan="4" style="text-align:center">
+						<p:commandButton image="save" ajax="true"
+							style="margin-right:20px;" value="Update" update="msgs"
+							action="#{petitionComponent.updatePetition(petitionComponent.petition,petitionComponent.petitionAction)}" />
+							
+						<p:commandButton image="Close Petition " ajax="true"
+							style="margin-right:20px;" value="Close" update="msgs"
+							action="#{petitionComponent.closePetition(petitionComponent.petition)}" />
+
+						<p:commandButton image="Reject Petition " ajax="true"
+							style="margin-right:20px;" value="Reject Petition" update="msgs"
+							action="#{petitionComponent.rejectPetition(petitionComponent.petition)}" />
+					</p:column>
+				</p:row>
+			</div>
+
+			<p:messages id="msgs" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<p:panelGrid>
+				<f:facet name="header">
+					<p:row>
+						<p:column colspan="4">
+                      #{petitionmsgs['navigation.save']}
+					</p:column>
+					</p:row>
+				</f:facet>
+
+				<p:row>
+					<p:column>
+						<h:outputText
+							value="#{petitionmsgs['petition.petitionid.title']}:*" />
+						<p:column>
+							<p:inputText value="#{petitionComponent.petition.petitionId}"
+								readonly="true	" />
+						</p:column>
+					</p:column>
+					<p:column>
+						<h:outputText value="Status:*" />
+						<p:column>
+							<h:outputText
+								value="#{petitionComponent.petition.petitionStatus}"
+								style="padding:5px;background-color:pink" />
+						</p:column>
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputText
+							value="#{petitionmsgs['petition.groupgrievance.title']}:*" />
+						<p:column>
+							<p:selectBooleanCheckbox
+								value="#{petitionComponent.petition.groupGrievance}" />
+						</p:column>
+					</p:column>
+					<p:column>
+						<h:outputText value="#{petitionmsgs['petition.mobileno.title']}:*" />
+					</p:column>
+					<p:column>
+						<p:inputText id="petiton_mobileNo"
+							value="#{petitionComponent.petition.mobileNo}" required="true"
+							label="petition_mobileNo" size="30"></p:inputText>
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputText for="country" value="Source:" />
+					</p:column>
+					<p:column>
+						<p:selectOneMenu id="id_petition_source"
+							value="#{petitionComponent.petition.petitionSource}"
+							label="petiton_source" required="false">
+							<f:selectItem itemLabel="Select One"
+								itemValue="petitionComponent.petition.petitionSource"
+								noSelectionOption="true" />
+							<f:selectItems value="#{dropdownView.locations}" />
+						</p:selectOneMenu>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="District *" />
+					</p:column>
+					<p:column>
+						<p:selectOneMenu id="id_district"
+							value="#{petitionComponent.petition.district}"
+							label="petiton_source" required="true">
+							<f:selectItem itemLabel="Select One"
+								itemValue="petitionComponent.petition.district"
+								noSelectionOption="true" />
+							<f:selectItems value="#{dropdownView.distict}" />
+						</p:selectOneMenu>
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputText value="#{petitionmsgs['petition.phoneno.title']}:*">
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<p:inputText id="petiton_phoneNo"
+							value="#{petitionComponent.petition.phoneNo}" required="true"
+							requiredMessage="#{petitionmsgs['petition.phoneno.help']}"
+							label="petition_phoneNo" size="30"></p:inputText>
+					</p:column>
+					<p:column>
+						<h:outputText value="#{petitionmsgs['petition.name.title']}:*"></h:outputText>
+					</p:column>
+					<p:column>
+						<p:inputText id="petiton_name"
+							value="#{petitionComponent.petition.name}" required="true"
+							requiredMessage="Please Enter The Name " label="petition_name"
+							size="30"></p:inputText>
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputText for="country"
+							value="#{petitionmsgs['petition.idproof.title']}:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="id_proof"
+							value="#{petitionComponent.petition.idProof}" required="true"
+							requiredMessage="Please Enter The Name " label="petition_name"
+							size="30"></p:inputText>
+					</p:column>
+					<p:column>
+						<h:outputText value="#{petitionmsgs['petition.idno.title']}:*" />
+					</p:column>
+					<p:column>
+						<p:inputText id="petiton_idno"
+							value="#{petitionComponent.petition.idNo}" required="true"
+							requiredMessage="Please Enter The Id No " label="petition_idno"
+							size="30">
+						</p:inputText>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputText
+							value="#{petitionmsgs['petition.fatherorhusbandname.title']}:*" />
+					</p:column>
+					<p:column>
+						<p:inputText id="petiton_fatherorhusbandname"
+							value="#{petitionComponent.petition.fatherOrHusbandName}"
+							required="true" requiredMessage="Please Enter father Name"
+							label="petition_fatherorhusbandname" size="30">
+						</p:inputText>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Send To:*" />
+					</p:column>
+
+					<p:column>
+						<p:selectOneMenu id="locations"
+							value="#{petitionComponent.petition.petitionWith}"
+							label="petiton_locations" required="true">
+							<f:selectItem itemLabel="Select One" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{dropdownView.locations}" />
+						</p:selectOneMenu>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputText value="FIR No *" />
+					</p:column>
+					<p:column>
+						<p:inputText id="petiton_firno"
+							value="#{petitionComponent.petition.firNo}" required="false"
+							requiredMessage="Please Enter FIR Id No " label="petition_firno"
+							size="30">
+						</p:inputText>
+					</p:column>
+					<p:column>
+						<h:outputText value="Date.*" />
+					</p:column>
+					<p:column>
+						<p:inputText value="#{petitionComponent.petition.petitionDate}"
+							required="true" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputText
+							value="#{petitionmsgs['petition.completeaddress.title']}:" />
+					</p:column>
+					<p:column colspan="3">
+						<p:inputTextarea id="petition_completeAddress"
+							value="#{petitionComponent.petition.completeAddress}" valrows="5"
+							cols="100" counter="display2" maxlength="1000"
+							counterTemplate="{0} characters remaining." autoResize="false">
+							<h:outputText id="display2" style="color:red" />
+						</p:inputTextarea>
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputText value="Subject:" />
+					</p:column>
+					<p:column colspan="3">
+						<p:inputTextarea id="petition_subject"
+							value="#{petitionComponent.petition.petitionSubject}" valrows="5"
+							cols="100" counter="display2" maxlength="1000"
+							counterTemplate="{0} characters remaining." autoResize="false">
+							<h:outputText id="display3" style="color:red" />
+						</p:inputTextarea>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputText value="Petition Description:" />
+					</p:column>
+					<p:column colspan="3">
+						<p:editor id="grvDescription" widgetVar="editorWidget"
+							value="#{petitionComponent.petition.grvDescription}" width="800" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputText value="Action Taken" />
+					</p:column>
+					<p:column colspan="3">
+
+						<p:editor id="actionTaken" widgetVar="editorWidget"
+							value="#{petitionComponent.petitionAction.actionTaken}"
+							width="800" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column colspan="4">
+						<p:fileUpload fileUploadListener="#{fileUploadComponent.handleFileUpload}"
+							allowTypes="/(\.|\/)(gif|jpeg|png|pdf)$/" sizeLimit="10000000"
+							description="Select Images" />
+					</p:column>
+				</p:row>
+
+			</p:panelGrid>
+			<div
+				style="text-align: center; background-color: lightgreen; padding: 5px">
+				<b>Petition Action History</b>
+			</div>
+
+			<p:dataTable id="dta"
+				value="#{petitionActionHistoryComponent.petitionActionList}"
+				var="current" rows="15" paginator="true" paginatorPosition="bottom">
+				<p:column>
+					<p:accordionPanel activeIndex="-1">
+						<p:tab
+							title="Action taken by #{current.actionTakenBy} / #{current.location}  on #{current.actionDate}">
+							<p:editor id="action_taken" disabled="true"
+								value="#{current.actionTaken}" width="1000" />
+						</p:tab>
+					</p:accordionPanel>
+				</p:column>
+			</p:dataTable>
+
+
+			<div
+				style="text-align: center; background-color: yellow; padding: 5px">
+				<p:row>
+					<p:column colspan="4" style="text-align:center">
+						<p:commandButton image="save" ajax="true"
+							style="margin-right:20px;" value="Update" update="msgs"
+							action="#{petitionComponent.updatePetition(petitionComponent.petition,petitionComponent.petitionAction)}" />
+
+						<p:commandButton image="Close Petition " ajax="true"
+							style="margin-right:20px;" value="Close" update="msgs"
+							action="#{petitionComponent.closePetition(petitionComponent.petition,petitionComponent.petitionAction)}" />
+
+						<p:commandButton image="Reject Petition " ajax="true"
+							style="margin-right:20px;" value="Reject" update="msgs"
+							action="#}" />
+					</p:column>
+				</p:row>
+			</div>
+		</h:form>
+		<p:dataList value="#{fileUploadView.getFileList()}" var="attachments"
+			type="ordered">
+			<f:facet name="header">
+                 Attachments
+               </f:facet>
+			<div
+				style="text-align: left; background-color: #CFCFCF; padding: 1px">
+				<a href="/petition/#{attachments.filePath}">#{attachments.filePath}</a>
+			</div>
+		</p:dataList>
+	</ui:define>
+</ui:composition>

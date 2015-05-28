@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/css/jsfdefault.css" />
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/themes/blitzer/skin.css" />
+</h:head>
+
+<h:body>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" collapsible="true"
+			style="background-image:red;">
+			<ui:insert name="header">
+				<img id="image-1" alt=""
+					src="#{request.contextPath}/images/header.jpg" height="100px"
+					width="100%" />
+			</ui:insert>
+
+		
+			<div style="background-color:pink;">
+
+				<center>
+					You are logged in as 
+					: User Name <h:outputText value="#{sessionScope['username']}" /> 
+					: Location : <h:outputText value="#{sessionScope['location']}" /> 
+					: Role : <h:outputText value="#{sessionScope['role']}" />
+				</center>
+			</div>
+		
+		</p:layoutUnit>
+
+		<p:layoutUnit position="south" collapsible="true"
+			style="background-image:red;">
+			<ui:insert name="footer">
+				<ui:include src="/jsf/commons/template/commonFooter.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center" collapsible="true"
+			style="background-image:red;">
+			
+			<!-- 
+			
+			
+			 -->
+
+			<ui:insert name="content">
+				<ui:include src="/jsf/commons/template/commonContent.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" collapsible="true"
+			style="background-image:red;">
+			<ui:insert name="menu">
+				<ui:include src="/jsf/commons/template/commonMenu.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="east" collapsible="true"
+			style="background-image:red;">
+			<ui:insert name="menu1">
+				<ui:include src="/jsf/commons/template/searchMenu.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+	</p:layout>
+
+	<ui:insert name="footer">
+		<ui:include src="/jsf/commons/template/commonFooter.xhtml" />
+	</ui:insert>
+
+</h:body>
+</html>

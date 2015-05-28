@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/jsf/commons/template/commonLayout.xhtml">
+
+	<ui:define name="head">
+	</ui:define>
+
+	<ui:define name="content">
+
+		<h:form>
+			<p:commandButton image="new" ajax="false" value="New"
+				action="#{RoleComponent.newRole()}" style="margin-right:20px;" />
+			
+			<p:spacer height="10px"></p:spacer>
+			
+			<p:dataTable id="dta" value="#{RoleComponent.listRoles()}"
+				var="current" rows="15" paginator="true" paginatorPosition="bottom">
+				<p:column>
+					<h:commandLink includeViewParams="true"
+						action="#{RoleComponent.selectRole(current.idrole)}">
+						<h:graphicImage value="/images/icons/view.gif" style="border:0;" />
+					</h:commandLink>
+					<h:commandLink includeViewParams="true"
+						action="#{RoleComponent.editRole(current.idrole)}">
+						<h:graphicImage value="/images/icons/edit.gif" style="border:0;" />
+					</h:commandLink>
+					<h:commandLink includeViewParams="true"
+						action="#{RoleComponent.confirmDeleteRole(current.idrole)}">
+						<h:graphicImage value="/images/icons/delete.gif" style="border:0;" />
+					</h:commandLink>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{rolemsgs['role.idrole.title']}" />
+					</f:facet>
+					<h:outputText value="#{current.idrole}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{rolemsgs['role.rolecd.title']}" />
+					</f:facet>
+					<h:outputText value="#{current.rolecd}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{rolemsgs['role.roledescription.title']}" />
+					</f:facet>
+					<h:outputText value="#{current.roledescription}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{rolemsgs['role.rolecol.title']}" />
+					</f:facet>
+					<h:outputText value="#{current.rolecol}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

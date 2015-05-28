@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/jsf/commons/template/commonLayout.xhtml">
+
+	<ui:define name="head">
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+			<p:dataTable id="dta" value="#{userMasterComponent.getUserList()}"
+				var="current" rows="15" paginator="true" paginatorPosition="bottom">
+				<p:column>
+					<h:commandLink includeViewParams="true"
+						action="#{userMasterComponent.editUser(current)}">
+						<h:graphicImage value="/images/icons/edit.gif" style="border:0;" />
+					</h:commandLink>
+				</p:column>
+
+				<p:column filterBy="#{current.loginId}" footerText="contains"
+					filterMatchMode="contains">
+					<f:facet name="header">Login ID</f:facet>
+					<h:outputText value="#{current.loginId}" />
+				</p:column>
+				<p:column filterBy="#{current.name}" footerText="contains"
+					filterMatchMode="contains">
+					<f:facet name="header">Name</f:facet>
+					<h:outputText value="#{current.name}" />
+				</p:column>
+
+				<p:column filterBy="#{current.userRole}" footerText="contains"
+					filterMatchMode="contains">
+					<f:facet name="header">Role</f:facet>
+					<h:outputText value="#{current.userRole}" />
+				</p:column>
+
+
+
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

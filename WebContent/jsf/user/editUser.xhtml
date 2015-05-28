@@ -1,0 +1,122 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/jsf/commons/template/commonLayout.xhtml">
+
+	<ui:define name="content">
+		<h:form id="form2">
+			<div
+				style="text-align: center; background-color: yellow; padding: 5px">
+				<p:row>
+					<p:column colspan="4" style="text-align:center">
+						<p:commandButton image="save" ajax="false"
+							style="margin-right:20px;"
+							value="Update" update="msgs"
+							action="#{userMasterComponent.updateUser(userMasterComponent.user)}" />
+
+
+
+
+						<p:button value="Reset"></p:button>
+
+					</p:column>
+				</p:row>
+			</div>
+
+
+
+
+
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+
+
+			<p:panelGrid>
+				<f:facet name="header">
+					<p:row>
+						<p:column colspan="4">
+                       Create New User
+					</p:column>
+					</p:row>
+				</f:facet>
+
+				<p:row>
+					<p:column>
+
+
+						<h:outputText value="loginId:*" />
+
+					</p:column>
+
+
+					<p:column>
+
+						<p:inputText id="loginId"
+							value="#{userMasterComponent.user.loginId}" style="width:250px;"
+							required="true" />
+					</p:column>
+
+
+
+
+
+
+					<p:column>
+						<h:outputText value="Name:*" />
+					</p:column>
+
+
+					<p:column>
+
+
+
+						<p:inputText id="name" value="#{userMasterComponent.user.name}"
+							required="true" style="width:250px;" />
+					</p:column>
+
+				</p:row>
+
+				<p:row>
+
+					<p:column>
+						<h:outputText value="Pasword:*" />
+					</p:column>
+
+
+					<p:column>
+
+						<p:inputText id="password"
+							value="#{userMasterComponent.user.password}" required="true"
+							style="width:250px;" />
+
+					</p:column>
+
+
+					<p:column>
+						<h:outputText for="userRole" value="Role:*" />
+					</p:column>
+
+					<p:column>
+						<p:selectOneMenu id="userRole" style="width:245px;"
+							value="#{userMasterComponent.user.userRole}"
+							label="petiton_source" required="true">
+							<f:selectItem itemLabel="Select One"
+								itemValue="userMasterComponent.user.userRole"
+								noSelectionOption="true" />
+							<f:selectItems value="#{dropdownView.locations}" />
+						</p:selectOneMenu>
+					</p:column>
+
+
+				</p:row>
+
+
+
+			</p:panelGrid>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

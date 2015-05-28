@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/jsf/commons/template/commonLayout.xhtml">
+	<ui:define name="head">
+	</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<h:form id="ExistingPetition">
+				<h:panelGrid columns="4" cellpadding="5">
+					<p:dataTable id="dta" value="#{PetitionFilterView.petitions}"
+						var="current" rows="16" paginator="true"
+						paginatorPosition="bottom" widgetVar="petitionTable"
+						emptyMessage="No petitions found with given criteria"
+						filteredValue="#{PetitionFilterView.filterPetitions}">
+
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Search all fields:" />
+								<p:inputText id="globalFilter"
+									onkeyup="PF('petitionTable').filter()" style="width:230px"
+									placeholder="Enter keyword" />
+							</p:outputPanel>
+						</f:facet>
+						<p:column>
+							<f:viewParam name="petitionId" value="#{current.petitionId}" />
+							<p:commandButton image="delete" ajax="false"
+								style="margin-right:20px;" value="Edit"
+								action="#{petitionComponent.editPetition(current)}" />
+						</p:column>
+
+						<p:column filterBy="#{current.petitionId}" footerText="contains"
+							filterMatchMode="contains">
+							<f:facet name="header">Petition ID</f:facet>
+							<h:outputText value="#{current.petitionId}" />
+						</p:column>
+
+
+						<p:column filterBy="#{current.petitionStatus}"
+							footerText="contains" filterMatchMode="contains">
+							<f:facet name="header">Status</f:facet>
+							<h:outputText value="#{current.petitionStatus}" />
+						</p:column>
+
+						<p:column filterBy="#{current.district}" footerText="contains"
+							filterMatchMode="contains">
+							<f:facet name="header">Distict</f:facet>
+							<h:outputText value="#{current.district}" />
+						</p:column>
+
+						<p:column filterBy="#{current.firNo}" footerText="contains"
+							filterMatchMode="contains">
+							<f:facet name="header">FIR NO.</f:facet>
+							<h:outputText value="#{current.firNo}" />
+						</p:column>
+
+
+						<p:column filterBy="#{current.mobileNo}" footerText="contains"
+							filterMatchMode="contains">
+							<f:facet name="header">Mobile No</f:facet>
+							<h:outputText value="#{current.mobileNo}" />
+						</p:column>
+
+						<p:column filterBy="#{current.name}" footerText="contains"
+							filterMatchMode="contains">
+							<f:facet name="header">Name</f:facet>
+							<h:outputText value="#{current.name}" />
+						</p:column>
+						<p:column filterBy="#{current.fatherOrHusbandName}"
+							footerText="contains" filterMatchMode="contains">
+							<f:facet name="header">Father Or Husband Name</f:facet>
+							<h:outputText value="#{current.fatherOrHusbandName}" />
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>
+			</h:form>
+		</h:form>
+	</ui:define>
+</ui:composition>

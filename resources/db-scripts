@@ -1,0 +1,4 @@
+use petition;
+
+ALTER TABLE `petition` CHANGE `grv_description` `grv_description` VARCHAR(10000) 
+CHARSET utf8 COLLATE utf8_general_ci DEFAULT '' NOT NULL;

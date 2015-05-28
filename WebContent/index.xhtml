@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/jsf/commons/template/commonLayout.xhtml">
+	
+	<ui:define name="content">
+		<h:form>
+				<p:growl id="msgs" showDetail="true" escape="false" />
+
+			<p:treeTable value="#{ttSelectionView.root1}" var="document"
+				selectionMode="single" selection="#{ttSelectionView.selectedNode}"
+				style="margin-top:0">
+				<f:facet name="header">
+              Organization Chart SP Jalore
+        </f:facet>
+				<p:column headerText="Name">
+					<h:outputText value="#{document.name}" />
+				</p:column>
+				<p:column headerText="Size">
+					<h:outputText value="#{document.size}" />
+				</p:column>
+				<p:column headerText="Type">
+					<h:outputText value="#{document.type}" />
+				</p:column>
+			</p:treeTable>
+
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

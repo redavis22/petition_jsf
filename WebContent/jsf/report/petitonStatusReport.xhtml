@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/jsf/commons/template/commonLayout.xhtml">
+
+
+	<ui:define name="content">
+
+
+
+		<h:form id="form1">
+			<div style="text-align: center; background-color: yellow;">
+
+
+			
+
+
+			</div>
+			<p:dataTable id="datatable1"
+				value="#{petitionStatusReportComponent.getPetitionStatusList()}"
+				var="current" rows="15" paginator="false" paginatorPosition="bottom">
+
+
+				<p:column filterBy="#{current.location}" footerText="contains"
+					filterMatchMode="contains">
+					<f:facet name="header">Location</f:facet>
+					<h:outputText value="#{current.location}" />
+				</p:column>
+
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="TOTAL" />
+					</f:facet>
+					<h:outputText value="#{current.total}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="OPEN" />
+					</f:facet>
+					<h:outputText value="#{current.open}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="CLOSED" />
+					</f:facet>
+					<h:outputText value="#{current.close}" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+
+
+
+
+	</ui:define>
+</ui:composition>
