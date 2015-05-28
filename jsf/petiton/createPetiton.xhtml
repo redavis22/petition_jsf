@@ -1,0 +1,325 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/jsf/commons/template/commonLayout.xhtml">
+
+	<script type="text/javascript">
+		function start() {
+			PF('statusDialog').show();
+		}
+		function stop() {
+			PF('statusDialog').hide();
+		}
+	</script>
+	<ui:define name="content">
+
+		<h:form id="form1">
+			
+				<p:dataTable id="datatable1"
+					value="#{petitionComponent.listDuplicatePetitons()}" var="current"
+					rows="15" paginator="false" paginatorPosition="bottom">
+
+					<p:column>
+						<h:commandLink includeViewParams="true"
+							action="#{petitionComponent.editPetition(current.petitionId)}">
+							<h:graphicImage value="/images/icons/edit.gif" style="border:0;" />
+						</h:commandLink>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText
+								value="#{petitionmsgs['petition.petitionid.title']}" />
+						</f:facet>
+						<h:outputText value="#{current.petitionId}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{petitionmsgs['petition.mobileno.title']}" />
+						</f:facet>
+						<h:outputText value="#{current.mobileNo}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{petitionmsgs['petition.phoneno.title']}" />
+						</f:facet>
+						<h:outputText value="#{current.phoneNo}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="#{petitionmsgs['petition.name.title']}" />
+						</f:facet>
+						<h:outputText value="#{current.name}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText
+								value="#{petitionmsgs['petition.fatherorhusbandname.title']}" />
+						</f:facet>
+						<h:outputText value="#{current.fatherOrHusbandName}" />
+					</p:column>
+				</p:dataTable>			
+		</h:form>
+
+
+
+		<h:form id="form2">
+			<div
+				style="text-align: center; background-color: yellow; padding: 5px">
+				<p:row>
+					<p:column colspan="4" style="text-align:center">
+						<p:commandButton image="save" ajax="false"
+							style="margin-right:20px;"
+							value="#{petitionmsgs['navigation.save']}" update="msgs"
+							action="#{petitionComponent.savePetition(petitionComponent.petition)}" />
+						<p:commandButton value="Reset Form" update="form2" process="@this"
+							style="margin-right:20px;">
+							<p:resetInput target="form2" />
+						</p:commandButton>
+					</p:column>
+				</p:row>
+			</div>
+
+			<p:messages id="msgs" closable="true" />
+			
+			<p:panelGrid>
+				<f:facet name="header">
+					<p:row>
+						<p:column colspan="6">
+                      #{petitionmsgs['navigation.save']}
+					</p:column>
+					</p:row>
+				</f:facet>
+				<p:row>
+					<p:column>
+						<h:outputText
+							value="#{petitionmsgs['petition.groupgrievance.title']}:*" />
+						<p:column>
+							<p:selectBooleanCheckbox
+								value="#{petitionComponent.petition.groupGrievance}" />
+						</p:column>
+					</p:column>
+					<p:column>
+						<h:outputText value="#{petitionmsgs['petition.mobileno.title']}:*" />
+					</p:column>
+					<p:column>
+						<p:inputText id="petiton_mobileNo"
+							value="#{petitionComponent.petition.mobileNo}" required="true"
+							label="petition_mobileNo" size="30">
+							<p:ajax event="keyup" 
+							listener="#{petitionComponent.handleKeyEventMobileNo}" 
+								update=":form1:datatable1">
+							</p:ajax>
+						</p:inputText>
+					</p:column>
+				</p:row>
+
+
+				<p:row>
+					<p:column>
+						<h:outputText value="#{petitionmsgs['petition.phoneno.title']}:*">
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<p:inputText id="petiton_phoneNo"
+							value="#{petitionComponent.petition.phoneNo}" required="true"
+							requiredMessage="#{petitionmsgs['petition.phoneno.help']}"
+							label="petition_phoneNo" size="30">
+							<p:ajax event="keyup"
+								listener="#{petitionComponent.handleKeyEventPhoneNo}">
+							</p:ajax>
+						</p:inputText>
+					</p:column>
+					<p:column>
+						<h:outputText value="#{petitionmsgs['petition.name.title']}:*"></h:outputText>
+					</p:column>
+					<p:column>
+						<p:inputText id="petiton_name"
+							value="#{petitionComponent.petition.name}" required="true"
+							requiredMessage="Please Enter The Name " label="petition_name"
+							size="30"></p:inputText>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputText for="country"
+							value="#{petitionmsgs['petition.idproof.title']}:" />
+					</p:column>
+					<p:column>
+						<p:selectOneMenu id="id_proof"
+							value="#{petitionComponent.petition.idProof}"
+							label="petiton_idproof" required="false">
+							<f:selectItem itemLabel="Select One"
+								itemValue="petitionComponent.petition.idProof"
+								noSelectionOption="true" />
+							<f:selectItems value="#{dropdownView.idProofs}" />
+						</p:selectOneMenu>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="ID No *" />
+					</p:column>
+					<p:column>
+						<p:inputText id="petiton_idno"
+							value="#{petitionComponent.petition.idNo}" required="true"
+							requiredMessage="Please Enter The Id No " label="petition_idno"
+							size="30">
+						</p:inputText>
+					</p:column>
+				</p:row>
+
+
+
+				<p:row>
+					<p:column>
+						<h:outputText for="country"
+							value="#{petitionmsgs['petition.source.title']}:" />
+					</p:column>
+					<p:column>
+						<p:selectOneMenu id="id_petition_source"
+							value="#{petitionComponent.petition.petitionSource}"
+							label="petiton_source" required="true">
+							<f:selectItem itemLabel="Select One"
+								itemValue="petitionComponent.petition.petitionSource"
+								noSelectionOption="true" />
+							<f:selectItems value="#{dropdownView.locations}" />
+						</p:selectOneMenu>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="District *" />
+					</p:column>
+					<p:column>
+						<p:selectOneMenu id="id_district"
+							value="#{petitionComponent.petition.district}"
+							label="petiton_source" required="true">
+							<f:selectItem itemLabel="Select One"
+								itemValue="petitionComponent.petition.district"
+								noSelectionOption="true" />
+							<f:selectItems value="#{dropdownView.districts}" />
+						</p:selectOneMenu>
+					</p:column>
+				</p:row>
+
+
+				<p:row>
+					<p:column>
+						<h:outputText
+							value="#{petitionmsgs['petition.fatherorhusbandname.title']}:*" />
+					</p:column>
+					<p:column>
+						<p:inputText id="petiton_fatherorhusbandname"
+							value="#{petitionComponent.petition.fatherOrHusbandName}"
+							required="true" requiredMessage="Please Enter father Name"
+							label="petition_fatherorhusbandname" size="30">
+						</p:inputText>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Send To:*" />
+					</p:column>
+
+					<p:column>
+						<p:selectOneMenu id="locations"
+							value="#{petitionComponent.petition.petitionWith}"
+							label="petiton_locations" required="false">
+							<f:selectItem itemLabel="Select One" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{dropdownView.locations}" />
+						</p:selectOneMenu>
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputText value="FIR No *" />
+					</p:column>
+					<p:column>
+						<p:inputText id="petiton_firno"
+							value="#{petitionComponent.petition.firNo}" required="false"
+							requiredMessage="Please Enter FIR Id No " label="petition_firno"
+							size="30">
+						</p:inputText>
+					</p:column>
+					<p:column>
+						<p:outputLabel for="button" value="Petition Date :" />
+					</p:column>
+					<p:column>
+						<p:calendar id="button" value="#{calendarView.date3}"
+							required="true" showOn="button" />
+					</p:column>
+				</p:row>
+
+
+				<p:row>
+					<p:column>
+						<h:outputText value="Reference No *" />
+					</p:column>
+					<p:column>
+						<p:inputText id="petiton_refno"
+							value="#{petitionComponent.petition.refNo}"
+							requiredMessage="Please Enter FIR Id No " label="petition_refno"
+							size="30">
+						</p:inputText>
+					</p:column>
+
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputText
+							value="#{petitionmsgs['petition.completeaddress.title']}:" />
+					</p:column>
+					<p:column colspan="3">
+						<p:inputTextarea id="petition_completeAddress"
+							value="#{petitionComponent.petition.completeAddress}" valrows="5"
+							cols="100" counter="display2" maxlength="1000" required="true"
+							counterTemplate="{0} characters remaining." autoResize="false">
+							<h:outputText id="display2" style="color:red" />
+						</p:inputTextarea>
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputText value="#{petitionmsgs['petition.subject.title']}:" />
+					</p:column>
+					<p:column colspan="3">
+						<p:inputTextarea id="petition_subject" required="true"
+							value="#{petitionComponent.petition.petitionSubject}" valrows="5"
+							cols="100" counter="display2" maxlength="1000"
+							counterTemplate="{0} characters remaining." autoResize="false">
+							<h:outputText id="display3" style="color:red" />
+						</p:inputTextarea>
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column>
+						<h:outputText
+							value="#{petitionmsgs['petition.grvdescription.title']}:" />
+					</p:column>
+					<p:column colspan="3">
+						<pe:ckEditor id="petition_grvdescription" width="800"
+							value="#{petitionComponent.petition.grvDescription}"
+							checkDirtyInterval="0">
+							<p:ajax event="save" listener="#{editorController.saveListener}" />
+						</pe:ckEditor>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputText value="Action Taken" />
+					</p:column>
+					<p:column colspan="3">
+						<p:editor id="petition_action_taken" widgetVar="editorWidget"
+							value="#{petitionComponent.petitionActionTaken.actionTaken}"
+							width="800" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

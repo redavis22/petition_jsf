@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/jsf/commons/template/commonLayout.xhtml">
+
+	<ui:define name="content">
+		<h:form prependId="false">
+			<p:panel
+				header="#{aclmastersusermsgs['aclmastersuser.title']} Details">
+				<p:messages />
+				<h:panelGrid id="detail" columns="6" styleClass="grid" cellpadding="5"
+					columnClasses="label,value">
+					<h:outputText
+						value="#{aclmastersusermsgs['aclmastersuser.userid.title']}:*" />
+					<p:inputText id="aclmastersuser_userid"
+						value="#{AclMastersUserComponent.aclmastersuser.userId}"
+						required="true" label="aclmastersuser_userid" />
+					<h:outputText
+						value="#{aclmastersusermsgs['aclmastersuser.organizationid.title']}:*" />
+					<p:inputText id="aclmastersuser_organizationid"
+						value="#{AclMastersUserComponent.aclmastersuser.organizationId}"
+						required="true" label="aclmastersuser_organizationid" />
+					<h:outputText
+						value="#{aclmastersusermsgs['aclmastersuser.firstname.title']}:" />
+					<p:inputText id="aclmastersuser_firstname"
+						value="#{AclMastersUserComponent.aclmastersuser.firstName}"
+						required="false" label="aclmastersuser_firstname" />
+					<h:outputText
+						value="#{aclmastersusermsgs['aclmastersuser.lastname.title']}:" />
+					<p:inputText id="aclmastersuser_lastname"
+						value="#{AclMastersUserComponent.aclmastersuser.lastName}"
+						required="false" label="aclmastersuser_lastname" />
+					<h:outputText
+						value="#{aclmastersusermsgs['aclmastersuser.fullname.title']}:" />
+					<p:inputText id="aclmastersuser_fullname"
+						value="#{AclMastersUserComponent.aclmastersuser.fullName}"
+						required="false" label="aclmastersuser_fullname" />
+					<h:outputText
+						value="#{aclmastersusermsgs['aclmastersuser.emailid.title']}:" />
+					<p:inputText id="aclmastersuser_emailid"
+						value="#{AclMastersUserComponent.aclmastersuser.emailId}"
+						required="false" label="aclmastersuser_emailid" />
+					<h:outputText
+						value="#{aclmastersusermsgs['aclmastersuser.departmentid.title']}:" />
+					<p:inputText id="aclmastersuser_departmentid"
+						value="#{AclMastersUserComponent.aclmastersuser.departmentId}"
+						required="false" label="aclmastersuser_departmentid" />
+					<h:outputText
+						value="#{aclmastersusermsgs['aclmastersuser.levelid.title']}:" />
+					<p:inputText id="aclmastersuser_levelid"
+						value="#{AclMastersUserComponent.aclmastersuser.levelId}"
+						required="false" label="aclmastersuser_levelid" />
+					<h:outputText
+						value="#{aclmastersusermsgs['aclmastersuser.siteid.title']}:" />
+					<p:inputText id="aclmastersuser_siteid"
+						value="#{AclMastersUserComponent.aclmastersuser.siteId}"
+						required="false" label="aclmastersuser_siteid" />
+					<h:outputText
+						value="#{aclmastersusermsgs['aclmastersuser.reportingto.title']}:" />
+					<p:inputText id="aclmastersuser_reportingto"
+						value="#{AclMastersUserComponent.aclmastersuser.reportingTo}"
+						required="false" label="aclmastersuser_reportingto" />
+					<h:outputText
+						value="#{aclmastersusermsgs['aclmastersuser.password.title']}:" />
+					<p:inputText id="aclmastersuser_password"
+						value="#{AclMastersUserComponent.aclmastersuser.password}"
+						required="false" label="aclmastersuser_password" />
+					<h:outputText
+						value="#{aclmastersusermsgs['aclmastersuser.roleid.title']}:" />
+					<p:inputText id="aclmastersuser_roleid"
+						value="#{AclMastersUserComponent.aclmastersuser.roleId}"
+						required="false" label="aclmastersuser_roleid" />
+					<h:panelGroup>
+						<p:commandButton image="save" ajax="false"
+							style="margin-right:20px;"
+							value="#{aclmastersusermsgs['navigation.save']}"
+							action="#{AclMastersUserComponent.saveAclMastersUser(AclMastersUserComponent.aclmastersuser)}" />
+					</h:panelGroup>
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

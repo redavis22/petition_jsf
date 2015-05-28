@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/jsf/commons/template/commonLayout.xhtml">
+
+	<ui:define name="content">
+		<h:form prependId="false">		
+			<p:panel header="#{petitonmsgs['petiton.title']} Details" style="margin-top:10px">
+				<p:messages />
+				<h:panelGrid id="detail" columns="2" styleClass="grid" columnClasses="label,value">
+						<h:outputText value="#{petitonmsgs['petiton.petitonid.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.petitonId}"/>
+						<h:outputText value="#{petitonmsgs['petiton.groupgrievance.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.groupGrievance}"/>
+						<h:outputText value="#{petitonmsgs['petiton.mobileno.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.mobileNo}"/>
+						<h:outputText value="#{petitonmsgs['petiton.phoneno.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.phoneNo}"/>
+						<h:outputText value="#{petitonmsgs['petiton.idproof.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.idProof}"/>
+						<h:outputText value="#{petitonmsgs['petiton.name.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.name}"/>
+						<h:outputText value="#{petitonmsgs['petiton.gender.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.gender}"/>
+						<h:outputText value="#{petitonmsgs['petiton.fatherorhusbandname.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.fatherOrHusbandName}"/>
+						<h:outputText value="#{petitonmsgs['petiton.completeaddress.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.completeAddress}"/>
+						<h:outputText value="#{petitonmsgs['petiton.ruralurban.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.ruralUrban}"/>
+						<h:outputText value="#{petitonmsgs['petiton.pinno.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.pinNo}"/>
+						<h:outputText value="#{petitonmsgs['petiton.district.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.district}"/>
+						<h:outputText value="#{petitonmsgs['petiton.blockorpanchayatsamiti.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.blockOrPanchayatSamiti}"/>
+						<h:outputText value="#{petitonmsgs['petiton.grampanchayat.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.gramPanchayat}"/>
+						<h:outputText value="#{petitonmsgs['petiton.grvdepartmenttype.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.grvDepartmentType}"/>
+						<h:outputText value="#{petitonmsgs['petiton.grvdepartment.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.grvDepartment}"/>
+						<h:outputText value="#{petitonmsgs['petiton.grvschemeservice.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.grvSchemeService}"/>
+						<h:outputText value="#{petitonmsgs['petiton.grvcategory.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.grvCategory}"/>
+						<h:outputText value="#{petitonmsgs['petiton.grvissue.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.grvIssue}"/>
+						<h:outputText value="#{petitonmsgs['petiton.grvdescription.title']}:" />
+							<h:outputText value="#{PetitonComponent.petiton.grvDescription}"/>
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

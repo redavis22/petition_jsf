@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/jsf/commons/template/commonLayout.xhtml">
+
+
+	<ui:define name="content">
+		<h:form prependId="false">
+			<p:commandButton image="back" ajax="false" immediate="true"
+				style="margin-right:20px;" value="#{rolemsgs['navigation.back']}"
+				action="/jsf/role/listRoles.xhtml" />
+
+			<p:panel header="#{rolemsgs['role.title']} Details"
+				style="margin-top:10px">
+				<p:messages />
+				<h:panelGrid id="detail" columns="2" styleClass="grid"
+					columnClasses="label,value">
+					<h:outputText value="#{rolemsgs['role.rolecd.title']}:" />
+					<p:inputText id="role_rolecd" value="#{RoleComponent.role.rolecd}"
+						required="false" label="role_rolecd" />
+					<h:outputText value="#{rolemsgs['role.roledescription.title']}:" />
+					<p:inputText id="role_roledescription"
+						value="#{RoleComponent.role.roledescription}" required="true"
+						label="role_roledescription" />
+					<h:outputText value="#{rolemsgs['role.rolecol.title']}:" />
+					<p:inputText id="role_rolecol"
+						value="#{RoleComponent.role.rolecol}" required="true"
+						label="role_rolecol" />
+					<h:panelGroup>
+						<p:commandButton image="save" ajax="false"
+							style="margin-right:20px;" value="#{rolemsgs['navigation.save']}"
+							action="#{RoleComponent.saveRole(RoleComponent.role)}" />
+					</h:panelGroup>
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

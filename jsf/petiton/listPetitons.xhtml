@@ -1,0 +1,103 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/jsf/commons/template/commonLayout.xhtml">
+	<ui:define name="head" />
+	<ui:define name="content">
+	
+		<h:form>
+			<p:dataTable emptyMessage="No Petitons Found" id="dta"
+				rowStyleClass="#{current.petitionStatus eq OPEN ? 'old' : null}"
+				value="#{petitionComponent.listPetitons()}"
+				widgetVar="petitionTable" var="current"
+				filteredValue="#{petitionComponent.filteredPetitions}"
+				paginator="true">
+				
+				<f:facet name="header">
+					<p:outputPanel>
+						<h:outputText value="Search all fields:" />
+						<p:inputText id="globalFilter"
+							onkeyup="PF('petitionTable').filter()" style="width:150px"
+							placeholder="Enter keyword" />
+					</p:outputPanel>
+				</f:facet>
+
+				<p:column>
+					<h:commandLink includeViewParams="true"
+						action="#{petitionComponent.editPetition(current.petitionId)}">
+						<h:graphicImage value="/images/icons/edit.gif" style="border:0;" />
+					</h:commandLink>
+
+					<h:commandLink includeViewParams="true"
+						action="#{petitionComponent.deletePetition(current.petitionId)}">
+						<h:graphicImage value="/images/icons/delete.gif" style="border:0;" />
+					</h:commandLink>
+				</p:column>
+
+
+				<p:column filterBy="#{current.petitionId}" headerText="Petiton Id"
+					footerText="contains" filterMatchMode="contains">
+					<h:outputText value="#{current.petitionId}" />
+				</p:column>
+
+
+				<p:column filterBy="#{current.petitionStatus}" headerText="Status"
+					footerText="contains" filterMatchMode="contains">
+					<h:outputText value="#{current.petitionStatus}" />
+				</p:column>
+
+
+				<p:column filterBy="#{current.district}" headerText="District"
+					footerText="contains" filterMatchMode="contains">
+					<h:outputText value="#{current.district}" />
+				</p:column>
+
+				<p:column filterBy="#{current.petitionWith}"
+					headerText="Pending With" footerText="contains"
+					filterMatchMode="contains">
+					<h:outputText value="#{current.petitionWith}" />
+				</p:column>
+
+
+
+				<p:column filterBy="#{current.mobileNo}" headerText="Mobile No"
+					footerText="contains" filterMatchMode="contains">
+					<h:outputText value="#{current.mobileNo}" />
+				</p:column>
+
+				<p:column filterBy="#{current.phoneNo}"
+					headerText="#{petitionmsgs['petition.phoneno.title']}"
+					footerText="contains" filterMatchMode="contains">
+					<h:outputText value="#{current.phoneNo}" />
+				</p:column>
+
+
+				<p:column filterBy="#{current.name}"
+					headerText="#{petitionmsgs['petition.name.title']}"
+					footerText="contains" filterMatchMode="contains">
+					<h:outputText value="#{current.name}" />
+				</p:column>
+
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText
+							value="#{petitionmsgs['petition.fatherorhusbandname.title']}" />
+					</f:facet>
+					<h:outputText value="#{current.fatherOrHusbandName}" />
+				</p:column>
+			</p:dataTable>
+			
+			<f:facet name="{Exporters}">
+				<h:commandLink>
+					<h:graphicImage value="/images/icons/delete.gif" style="border:0;" />
+					<p:dataExporter type="xls" target="dta" fileName="petitions"
+						pageOnly="true" />
+				</h:commandLink>
+			</f:facet>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

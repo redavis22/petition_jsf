@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/jsf/commons/template/commonLayout.xhtml">	
+
+	<ui:define name="content">
+		<h:form prependId="false">
+			<p:commandButton image="back" ajax="false" immediate="true" style="margin-right:20px;" value="#{aclmastersusermsgs['navigation.back']}" action="/jsf/aclmastersuser/listAclMastersUsers.xhtml"/>
+		
+			<p:panel header="#{aclmastersusermsgs['aclmastersuser.title']} Details" style="margin-top:10px">
+				<p:messages />
+				<h:panelGrid id="detail" columns="2" styleClass="grid" columnClasses="label,value">
+						<h:outputText value="#{aclmastersusermsgs['aclmastersuser.userid.title']}:" />
+							<h:outputText value="#{AclMastersUserComponent.aclmastersuser.userId}"/>
+						<h:outputText value="#{aclmastersusermsgs['aclmastersuser.organizationid.title']}:" />
+							<h:outputText value="#{AclMastersUserComponent.aclmastersuser.organizationId}"/>
+						<h:outputText value="#{aclmastersusermsgs['aclmastersuser.firstname.title']}:" />
+							<h:outputText value="#{AclMastersUserComponent.aclmastersuser.firstName}"/>
+						<h:outputText value="#{aclmastersusermsgs['aclmastersuser.lastname.title']}:" />
+							<h:outputText value="#{AclMastersUserComponent.aclmastersuser.lastName}"/>
+						<h:outputText value="#{aclmastersusermsgs['aclmastersuser.fullname.title']}:" />
+							<h:outputText value="#{AclMastersUserComponent.aclmastersuser.fullName}"/>
+						<h:outputText value="#{aclmastersusermsgs['aclmastersuser.emailid.title']}:" />
+							<h:outputText value="#{AclMastersUserComponent.aclmastersuser.emailId}"/>
+						<h:outputText value="#{aclmastersusermsgs['aclmastersuser.departmentid.title']}:" />
+							<h:outputText value="#{AclMastersUserComponent.aclmastersuser.departmentId}"/>
+						<h:outputText value="#{aclmastersusermsgs['aclmastersuser.levelid.title']}:" />
+							<h:outputText value="#{AclMastersUserComponent.aclmastersuser.levelId}"/>
+						<h:outputText value="#{aclmastersusermsgs['aclmastersuser.siteid.title']}:" />
+							<h:outputText value="#{AclMastersUserComponent.aclmastersuser.siteId}"/>
+						<h:outputText value="#{aclmastersusermsgs['aclmastersuser.reportingto.title']}:" />
+							<h:outputText value="#{AclMastersUserComponent.aclmastersuser.reportingTo}"/>
+						<h:outputText value="#{aclmastersusermsgs['aclmastersuser.password.title']}:" />
+							<h:outputText value="#{AclMastersUserComponent.aclmastersuser.password}"/>
+						<h:outputText value="#{aclmastersusermsgs['aclmastersuser.roleid.title']}:" />
+							<h:outputText value="#{AclMastersUserComponent.aclmastersuser.roleId}"/>
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
