@@ -65,8 +65,12 @@ public class LocationService {
 		Session sessionHibernate = HibernateSessionFactory.getSession();
 
 		try {
-			locationChild = sessionHibernate.createCriteria(LocationChild.class).add(Restrictions.eq("id.parentLocation", locationId)).list();
-			for (Iterator iterator = locationChild.iterator(); iterator.hasNext();) {
+			locationChild = sessionHibernate
+					.createCriteria(LocationChild.class)
+					.add(Restrictions.eq("id.parentLocation", locationId))
+					.list();
+			for (Iterator iterator = locationChild.iterator(); iterator
+					.hasNext();) {
 				LocationChild locationChild2 = (LocationChild) iterator.next();
 				childLocation.add(locationChild2.getLocationByChildLocation());
 			}
@@ -83,22 +87,23 @@ public class LocationService {
 		return childLocation;
 	}
 
-//	public static void main(String args[]) {
-//		Location root = new Location();
-//		root.setId(1);
-//		List<Location> completeList = buildList(root);
-//		for (Iterator iterator = completeList.iterator(); iterator.hasNext();) {
-//			Location location = (Location) iterator.next();
-//		}
-//		System.out.println(completeList);
-//	}
+	// public static void main(String args[]) {
+	// Location root = new Location();
+	// root.setId(1);
+	// List<Location> completeList = buildList(root);
+	// for (Iterator iterator = completeList.iterator(); iterator.hasNext();) {
+	// Location location = (Location) iterator.next();
+	// }
+	// System.out.println(completeList);
+	// }
 
 	public static List<Location> buildList(Location location) {
 		List<Location> childLocatoins = getLocationChilds(location.getId());
 		if (childLocatoins.size() == 0) {
 			return childLocatoins;
 		} else {
-			for (Iterator iterator = childLocatoins.iterator(); iterator.hasNext();) {
+			for (Iterator iterator = childLocatoins.iterator(); iterator
+					.hasNext();) {
 				Location childLocation = (Location) iterator.next();
 				if (childLocation != null) {
 					childLocatoins.addAll(buildList(childLocation));
